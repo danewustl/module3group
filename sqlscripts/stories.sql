@@ -4,5 +4,5 @@ create table stories(
     storyId integer not null auto_increment,
     poster integer not null,
     primary key (storyId),
-    foreign key (poster) references user (userId)
+    foreign key (poster) references users (userId)
 ) engine = InnoDB default character set = utf8 collate = utf8_general_ci;

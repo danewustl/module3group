@@ -11,6 +11,7 @@ if(!$stmt) {
   printf("Bad query: %s", $mysqli->error);
   exit;
 }
+// TODO be sure to check for duplicate usernames
 $stmt->close();
 header("Location: ./login.php");
 ?>

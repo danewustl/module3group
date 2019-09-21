@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
   } elseif ($action == 'delete_story') {
     $storyId = $_POST['story_id'];
-    $stmt = $mysqli->prepare("delete from stories where storyId=?");
-    $stmt->bind_param("d", $storyId);
+    $stmt = $mysqli->prepare("delete from stories where storyId=? and poster=?");
+    $stmt->bind_param("ds", $storyId, $user);
     $stmt->execute();
     $stmt->close();
   }
@@ -27,6 +27,7 @@ $stmt->bind_result($link, $poster, $posterId, $storyid);
 <html>
   <?php include "./header.php" ?>
   <body>
+    <a href="./login.php">Logout</a><a href="./account.php">Account</a>
     <form action="./news.php" method="POST">
       <label>URL:</label><input type="text" name="url">
       <input type="hidden" name="action" value="post_story">

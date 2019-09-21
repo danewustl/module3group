@@ -1,3 +1,4 @@
+use news;
 create table comments(
     comment varchar(3000) not null,
     commentId integer not null auto_increment,

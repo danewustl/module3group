@@ -1,3 +1,4 @@
+use news;
 create table stories(
     link varchar(512) not null,
     storyId integer not null auto_increment,

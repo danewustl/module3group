@@ -1,3 +1,4 @@
+use news;
 create table users(
     username varchar(50) not null,
     userId integer not null auto_increment,

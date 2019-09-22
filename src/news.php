@@ -2,12 +2,26 @@
 include "./guard.php";
 include "./database.php";
 
+function get_title($url) {
+  $page = file_get_contents($url);
+  if (!$page) {
+    return $url;
+  }
+  preg_match("/<title>(.*)<\/title>/siU", $page, $matches);
+  $title = $matches[1];
+  if (!$title) {
+    return $url;
+  }
+  return $title;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $action = $_POST['action'];
   if ($action == 'post_story') {
     $url = $_POST['url'];
-    $stmt = $mysqli->prepare("insert into stories (link, poster) values (?, ?)");
-    $stmt->bind_param("sd", $url, $user);
+    $title = get_title($url);
+    $stmt = $mysqli->prepare("insert into stories (link, poster, title) values (?, ?, ?)");
+    $stmt->bind_param("sds", $url, $user, $title);
     $stmt->execute();
     $stmt->close();
   } elseif ($action == 'delete_story') {
@@ -19,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 }
 
-$stmt = $mysqli->prepare("select stories.link, users.username, users.userId, stories.storyId from stories, users where users.userId = stories.poster order by stories.storyId desc");
+$stmt = $mysqli->prepare("select stories.title, users.username, users.userId, stories.storyId from stories, users where users.userId = stories.poster order by stories.storyId desc");
 $stmt->execute();
-$stmt->bind_result($link, $poster, $posterId, $storyid);
+$stmt->bind_result($title, $poster, $posterId, $storyId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,9 +50,9 @@ $stmt->bind_result($link, $poster, $posterId, $storyid);
     <ul>
       <?php
       while($stmt->fetch()) {
-        echo "<li><a href=\"$link\">$link</a> by $poster";
+        echo "<li><a href=\"./view.php?sid=$storyId\">$title</a> by $poster";
         if ($posterId == $user) {
-          echo "<form action=./news.php method=POST><input type=hidden name=story_id value=$storyid><input type=hidden name=action value=delete_story><input type=submit value=Delete></form>";
+          echo "<form action=./news.php method=POST><input type=hidden name=story_id value=$storyId><input type=hidden name=action value=delete_story><input type=submit value=Delete></form>";
         }
         echo "</li>";
       }

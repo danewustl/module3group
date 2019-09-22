@@ -27,6 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
   }
 }
+  $stmt2 = $mysqli->prepare("select comments.comment, users.username, users.userId from comments, users where users.userId = comments.commenter and comments.storyId=? order by comments.commentId");
+  $stmt2->bind_param("d", $storyId);
+  $stmt2->execute();
+  $stmt2->bind_result($comment, $commenter, $commenterId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,5 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <input type="submit" value="Post Comment">
     </form>
 
+    <?php
+      while($stmt2->fetch()) {
+        echo "<li>$commenter says: $comment";
+        echo "</li>";
+      }
+      ?>
   </body>
 </html>

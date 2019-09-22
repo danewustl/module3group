@@ -37,6 +37,7 @@ $stmt2->bind_result($commentId, $comment, $commenter, $commenterId);
 <html>
   <?php include "./header.php" ?>
   <body>
+  <a href="./news.php">Return to home page.</a>
     <?php echo "<h1>$title by $poster</h1>";
     echo " <a href=$url> $url </a>"; ?>
     <?php if ($user) { ?>

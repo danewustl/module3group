@@ -26,17 +26,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
   <?php include "./header.php" ?>
   <body>
-    <h1 class=login>Welcome to your news-sharing website.</h1>
-    <h2>Register or sign in to be able to add files and comments.</h2>
+    <h1 class=login>Welcome to your news sharing website.</h1>
+    <h1 class=view>Register or sign in to be able to add files and comments.</h1>
+    <h2>
     <form action=<?php echo $_SERVER["PHP_SELF"];?> method="POST">
-      <label>Enter username: <input type="text" name="user"> </label>
-      <label>Enter password: <input type="password" name="password"> </label>
+      <label>Login. Username: <input type="text" name="user"> </label>
+      <label>Password: <input type="password" name="password"> </label>
       <input type="submit" value="Login">
     </form>
     <form action="./signup.php" method="POST">
-      <label>Enter username: <input type="text" name="user"> </label>
-      <label>Enter password: <input type="password" name="password"> </label>
+      <label>Sign up. Username: <input type="text" name="user"> </label>
+      <label>Password: <input type="password" name="password"> </label>
       <input type="submit" value="Signup">
     </form>
+    <form action="./news.php" method="POST">
+      <input type="hidden" name="action" value="continue">
+      <input type="submit" value="Continue without signing in.">
+    </h2>
   </body>
 </html>

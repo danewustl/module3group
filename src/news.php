@@ -41,12 +41,16 @@ $stmt->bind_result($title, $poster, $posterId, $storyId);
 <html>
   <?php include "./header.php" ?>
   <body>
+    <?php if ($user) { ?>
     <a href="./login.php">Logout</a><a href="./account.php">Account</a>
     <form action="./news.php" method="POST">
       <label>URL:</label><input type="text" name="url">
       <input type="hidden" name="action" value="post_story">
       <input type="submit" value="Post Story">
     </form>
+    <?php } else { ?>
+      <a href="./login.php">Log In/Register</a>
+    <?php } ?>
     <ul>
       <?php
       while($stmt->fetch()) {

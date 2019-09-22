@@ -17,6 +17,9 @@ input[type="submit"] {border: none;
     font-size: 14pt;
     border: 2px solid black;
     border-radius: 4px;}
+input[type="password"] {font-size: 24pt;
+    border: 1px solid black;
+    border-radius: 6px;}    
 input[type="file"] {border: none;
     width: 170px;
     color:rgb(128, 0, 0);

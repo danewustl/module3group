@@ -26,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
   <?php include "./header.php" ?>
   <body>
-    <h1 class=login>Welcome to your news website. Please enter a valid user to be able to view files.</h1>
+    <h1 class=login>Welcome to your news-sharing website.</h1>
+    <h2>Register or sign in to be able to add files and comments.</h2>
     <form action=<?php echo $_SERVER["PHP_SELF"];?> method="POST">
       <label>Enter username: <input type="text" name="user"> </label>
       <label>Enter password: <input type="password" name="password"> </label>

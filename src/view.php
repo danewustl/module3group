@@ -9,33 +9,32 @@ $stmt->bind_param('d', $storyId);
 $stmt->execute();
 $stmt->bind_result($title, $poster, $url);
 $stmt->fetch();
+$stmt->close();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $action = $_POST['action'];
-    if ($action == 'post_comment') {
-      $comment = $_POST['comment'];
-      $stmt = $mysqli->prepare("insert into comments (comment, storyId, commenter) values (?, ?, ?)");
-      
-      $stmt->bind_param("sdd", $comment, $storyId, $user);
-      echo $mysqli->error;
-      $stmt->execute();
-      $stmt->close();
-    } elseif ($action == 'delete_story') {
-      $storyId = $_POST['story_id'];
-      $stmt = $mysqli->prepare("delete from stories where storyId=? and poster=?");
-      $stmt->bind_param("ds", $storyId, $user);
-      $stmt->execute();
-      $stmt->close();
-    }
+  $action = $_POST['action'];
+  if ($action == 'post_comment') {
+    $comment = $_POST['comment'];
+    $stmt = $mysqli->prepare("insert into comments (comment, storyId, commenter) values (?, ?, ?)");
+    $stmt->bind_param("sdd", $comment, $storyId, $user);
+    $stmt->execute();
+    $stmt->close();
+  } elseif ($action == 'delete_story') {
+    $storyId = $_POST['story_id'];
+    $stmt = $mysqli->prepare("delete from stories where storyId=? and poster=?");
+    $stmt->bind_param("ds", $storyId, $user);
+    $stmt->execute();
+    $stmt->close();
   }
+}
 ?>
 <!DOCTYPE html>
 <html>
   <?php include "./header.php" ?>
   <body>
     <?php echo "<h1>$title by $poster</h1>";
-   echo " <a href=$url> $url </a>"; ?>
-   <form action=<?php echo "./view.php?sid=$storyId";?> method="POST">
+    echo " <a href=$url> $url </a>"; ?>
+    <form action=<?php echo "./view.php?sid=$storyId";?> method="POST">
       <textarea rows="4" cols="50" name="comment"></textarea>
       <input type="hidden" name="action" value="post_comment">
       <input type="submit" value="Post Comment">

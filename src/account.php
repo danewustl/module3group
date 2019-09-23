@@ -28,7 +28,7 @@ $stmt->close();
     </form>
     <br>
     <h1 class="view">
-    <form action="./news.php" method="POST">
+      <form action="./news.php">
       <input type="submit" value="Return to homepage">
     </form>
 </h1>

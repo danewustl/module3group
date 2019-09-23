@@ -30,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <h1 class=view>Register or sign in to be able to add files and comments.</h1>
     <h2>
     <form action=<?php echo $_SERVER["PHP_SELF"];?> method="POST">
-      <label>Login. Username: <input type="text" name="user"> </label>
+      <label><label class="red">Login:</label> Username: <input type="text" name="user"> </label>
       <label>Password: <input type="password" name="password"> </label>
       <input type="submit" value="Login">
     </form>
     <form action="./signup.php" method="POST">
-      <label>Sign up. Username: <input type="text" name="user"> </label>
+      <label><label class="red">Sign up:</label> Username: <input type="text" name="user"> </label>
       <label>Password: <input type="password" name="password"> </label>
       <input type="submit" value="Signup">
     </form>

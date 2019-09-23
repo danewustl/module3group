@@ -45,6 +45,9 @@ float: right;}
 a{font-size: 24pt;}
 label{font-size: 24pt;
 text-align: center;}
+label.red{font-size: 24pt;
+text-align: center;
+color:red;}
 h1.login{font-size: 30pt;
 text-align: center;}
 h1.view{font-size: 20pt;

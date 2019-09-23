@@ -3,16 +3,21 @@ include "./guard.php";
 include "./database.php";
 
 function get_title($url) {
-  $page = file_get_contents($url);
-  if (!$page) {
+  if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
     return $url;
   }
-  preg_match("/<title>(.*)<\/title>/siU", $page, $matches);
-  $title = $matches[1];
-  if (!$title) {
-    return $url;
+  else{
+    $page = file_get_contents($url);
+    if (!$page) {
+      return $url;
+    }
+    preg_match("/<title>(.*)<\/title>/siU", $page, $matches);
+    $title = $matches[1];
+    if (!$title) {
+      return $url;
+    }
+    return $title;
   }
-  return $title;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -51,9 +56,9 @@ $stmt->bind_result($title, $poster, $posterId, $storyId);
       <h2>Click on a link to view comments or go to the article/website.</h2>
       <?php if ($user) { ?>
     <h1 class="view"><form action="./news.php" method="POST">
-      <label>URL:</label><input type="text" name="url">
+      <label>URL or discussion forum title:</label><input type="text" name="url">
       <input type="hidden" name="action" value="post_story">
-      <input type="submit" value="Share Story">
+      <input type="submit" value="Post">
     </form>
       </h1>
     <?php }?>

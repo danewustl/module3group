@@ -38,11 +38,13 @@ $stmt2->bind_result($commentId, $comment, $commenter, $commenterId);
   <?php include "./header.php" ?>
   <body>
   <a href="./news.php">Return to home page.</a>
-    <?php echo "<h1 class=\"login\">$title shared by $poster</h1>";
+    <?php 
     if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
-      echo "<label> This is a discussion page, no valid URL is associated with this entry. </label>";
+      echo "<h1 class=\"login\">$title A discussion forum by $poster</h1>";
+      echo "<h4> This is a discussion forum, no valid URL has been associated with this entry. </h4>";
     }
     else{
+      echo "<h1 class=\"login\">$title. Shared by $poster</h1>";
       echo " <a href=$url> $url </a>";
     }
    ?>

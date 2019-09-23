@@ -42,19 +42,24 @@ $stmt->bind_result($title, $poster, $posterId, $storyId);
   <?php include "./header.php" ?>
   <body>
     <?php if ($user) { ?>
-    <a href="./login.php">Logout</a><a href="./account.php">Account</a>
-    <form action="./news.php" method="POST">
-      <label>URL:</label><input type="text" name="url">
-      <input type="hidden" name="action" value="post_story">
-      <input type="submit" value="Post Story">
-    </form>
+    <a href="./login.php">Logout</a><a class="right" href="./account.php">Account settings</a>
     <?php } else { ?>
       <a href="./login.php">Log In/Register</a>
     <?php } ?>
     <ul>
+      <h1 class="login">Here are the articles and websites that have been shared.</h1>
+      <h2>Click on a link to view comments or go to the article/website.</h2>
+      <?php if ($user) { ?>
+    <h1 class="view"><form action="./news.php" method="POST">
+      <label>URL:</label><input type="text" name="url">
+      <input type="hidden" name="action" value="post_story">
+      <input type="submit" value="Share Story">
+    </form>
+      </h1>
+    <?php }?>
       <?php
       while($stmt->fetch()) {
-        echo "<li><a href=\"./view.php?sid=$storyId\">$title</a> by $poster";
+        echo "<li><a href=\"./view.php?sid=$storyId\">$title</a><h3> shared by<h3 class=\"underline\"> $poster</h3></h3>";
         if ($posterId == $user) {
           echo "<form action=./news.php method=POST><input type=hidden name=story_id value=$storyId><input type=hidden name=action value=delete_story><input type=submit value=Delete></form>";
         }

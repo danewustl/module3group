@@ -19,12 +19,18 @@ $stmt->close();
 <html>
   <?php include "./header.php" ?>
   <body>
-    <h1>Account Information</h1>
-    <p>Name: <?php echo $username; ?></p>
+    <h1 class="login">Account Information</h1>
+    <h1 class="view">Username: <?php echo $username; ?></h1>
     <form action="./account.php" method="POST">
-      <label>Change name:</label>
+      <label>Change username:</label>
       <input type="text" name="name">
       <input type="submit" value="Change">
     </form>
+    <br>
+    <h1 class="view">
+    <form action="./news.php" method="POST">
+      <input type="submit" value="Return to homepage">
+    </form>
+</h1>
   </body>
 </html>

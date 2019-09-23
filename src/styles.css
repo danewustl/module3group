@@ -45,6 +45,7 @@ float: right;}
 a{font-size: 24pt;}
 label{font-size: 24pt;
 text-align: center;}
+a.right{float: right;}
 label.red{font-size: 24pt;
 text-align: center;
 color:red;}
@@ -53,3 +54,7 @@ text-align: center;}
 h1.view{font-size: 20pt;
 text-align: center;}
 h2{text-align: center;}
+h3{font-size: 20pt;
+    display:inline;}
+h3.underline{text-decoration: underline;
+display:inline;}

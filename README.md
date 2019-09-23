@@ -3,9 +3,9 @@
 
 - [ ] Add rationale and description of creative portion
 - [ ] Post table creation scripts
-- [ ] Add Styling
+- [ ] Add Styling (mostly done)
 - [ ] Cross site forgery prevention
 - [ ] Add reply to comments
-- [ ] Better navigation
+- [X] Better navigation
 - [ ] Edit stories and comments
 - [ ] Upload project to real github

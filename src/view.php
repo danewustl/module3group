@@ -41,10 +41,11 @@ $stmt2->bind_result($commentId, $comment, $commenter, $commenterId);
 <html>
   <?php include "./header.php" ?>
   <body>
-  <a href="./news.php">Return to home page.</a>
+    <a href="./news.php">Return to home page.</a>
     <?php 
     if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
       echo "<h1 class=\"login\">$title A discussion forum by $poster</h1>";
+      echo "<p>$hits page views.</p>";
       echo "<h4> This is a discussion forum, no valid URL has been associated with this entry. </h4>";
     }
     else{
@@ -52,13 +53,13 @@ $stmt2->bind_result($commentId, $comment, $commenter, $commenterId);
       echo "<p>$hits page views.</p>";
       echo "<p><a href=$url> $url </a></p>";
     }
-   ?>
+    ?>
     <?php if ($user) { ?>
-    <form action=<?php echo "./view.php?sid=$storyId";?> method="POST">
-      <textarea rows="4" cols="50" name="comment"></textarea>
-      <input type="hidden" name="action" value="post_comment">
-      <input type="submit" value="Post Comment">
-    </form>
+      <form action=<?php echo "./view.php?sid=$storyId";?> method="POST">
+        <textarea rows="4" cols="50" name="comment"></textarea>
+        <input type="hidden" name="action" value="post_comment">
+        <input type="submit" value="Post Comment">
+      </form>
     <?php } ?>
     <ul>
       <?php

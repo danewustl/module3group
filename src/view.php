@@ -4,10 +4,14 @@ include "./database.php";
 
 $storyId=$_GET['sid'];
 
-$stmt = $mysqli->prepare("select stories.title, users.username, stories.link from stories, users where users.userId = stories.poster and stories.storyId = ?");
+$stmt = $mysqli->prepare("update stories set hits = hits + 1 where storyId = ?");
 $stmt->bind_param('d', $storyId);
 $stmt->execute();
-$stmt->bind_result($title, $poster, $url);
+$stmt->close();
+$stmt = $mysqli->prepare("select stories.title, users.username, stories.link, stories.hits from stories, users where users.userId = stories.poster and stories.storyId = ?");
+$stmt->bind_param('d', $storyId);
+$stmt->execute();
+$stmt->bind_result($title, $poster, $url, $hits);
 $stmt->fetch();
 $stmt->close();
 
@@ -45,7 +49,8 @@ $stmt2->bind_result($commentId, $comment, $commenter, $commenterId);
     }
     else{
       echo "<h1 class=\"login\">$title. Shared by $poster</h1>";
-      echo " <a href=$url> $url </a>";
+      echo "<p>$hits page views.</p>";
+      echo "<p><a href=$url> $url </a></p>";
     }
    ?>
     <?php if ($user) { ?>

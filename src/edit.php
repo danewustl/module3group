@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <textarea rows="4" cols="50" name="comment"><?php echo $text; ?></textarea>
       <input type="hidden" name="action" value="edit_comment">
       <input type="hidden" name="cid" value=<?php echo $commentId ?>>
-      <input type="submit" value="Edit Comments">
+      <input type="submit" value="Edit Comment">
     </form>
   </body>
 </html>

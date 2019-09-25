@@ -2,7 +2,7 @@
 // Make sure the user is logged in, and then set the global user
 session_start();
 global $user;
-if ($_SESSION['loggedIn']) {
+if (array_key_exists('loggedIn', $_SESSION)) {
   $user = $_SESSION['user'];
 } else {
   $user = null;

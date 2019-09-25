@@ -38,7 +38,7 @@ input[type="radio"] {cursor: grabbing;}
 div.border{border: 2px solid rgb(255,218,185);
     border-radius: 4px;
     padding: 8px 8px 8px 8px;}
-form.inline{display: inline-block;}
+form {display: inline-block;}
 ul {list-style-type: circle;}
 a.logout {font-size: 16pt;
 float: right;}

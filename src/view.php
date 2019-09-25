@@ -29,6 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("ds", $commentId, $user);
     $stmt->execute();
     $stmt->close();
+  } elseif ($action == 'edit_comment') {
+    $comment = htmlspecialchars($_POST['comment']);
+    $commentId = $_POST['cid'];
+    $stmt = $mysqli->prepare("update comments set comment = ? where commentId = ?");
+    $stmt->bind_param("sd", $comment, $commentId);
+    $stmt->execute();
+    $stmt->close();
   }
 }
 
@@ -67,6 +74,7 @@ $stmt2->bind_result($commentId, $comment, $commenter, $commenterId);
         echo "<li>$commenter says: $comment";
         if ($commenterId == $user) {
           echo "<form action=./view.php?sid=$storyId method=POST><input type=hidden name=comment_id value=$commentId><input type=hidden name=action value=delete_comment><input type=submit value=Delete></form>";
+          echo "<form action=./edit.php method=POST><input type=hidden name=cid value=$commentId><input type=hidden name=sid value=$storyId><input type=hidden name=action value=edit_comment><input type=submit value=Edit></form>";
         }
         echo "</li>";
       }

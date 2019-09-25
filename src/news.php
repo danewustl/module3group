@@ -35,6 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("ds", $storyId, $user);
     $stmt->execute();
     $stmt->close();
+  } elseif ($action == 'edit_story') {
+    $link = htmlspecialchars($_POST['link']);
+    $title = get_title($link);
+    $storyId = $_GET['sid'];
+    $stmt = $mysqli->prepare("update stories set link = ?, title = ? where storyId = ?");
+    $stmt->bind_param("ssd", $link, $title, $storyId);
+    $stmt->execute();
+    $stmt->close();
   }
 }
 
@@ -67,6 +75,7 @@ $stmt->bind_result($title, $poster, $posterId, $storyId);
         echo "<li><a href=\"./view.php?sid=$storyId\">$title</a><h3> shared by<h3 class=\"underline\"> $poster</h3></h3>";
         if ($posterId == $user) {
           echo "<form action=./news.php method=POST><input type=hidden name=story_id value=$storyId><input type=hidden name=action value=delete_story><input type=submit value=Delete></form>";
+          echo "<form action=./editStory.php method=POST><input type=hidden name=sid value=$storyId><input type=hidden name=action value=edit_story><input type=submit value=Edit></form>";
         }
         echo "</li>";
       }

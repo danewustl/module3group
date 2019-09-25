@@ -7,7 +7,7 @@ unset($_SESSION['user']);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Log in
   require "./database.php";
-  $username = $_POST['user'];
+  $username = htmlspecialchars($_POST['user']);
   $password = $_POST['password'];
 
   $stmt = $mysqli->prepare("select userId, userPass from users where username=? limit 1");

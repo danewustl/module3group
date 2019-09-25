@@ -21,9 +21,9 @@ function get_title($url) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $action = $_POST['action'];
+  $action = htmlspecialchars($_POST['action']);
   if ($action == 'post_story') {
-    $url = $_POST['url'];
+    $url = htmlspecialchars($_POST['url']);
     $title = get_title($url);
     $stmt = $mysqli->prepare("insert into stories (link, poster, title) values (?, ?, ?)");
     $stmt->bind_param("sds", $url, $user, $title);

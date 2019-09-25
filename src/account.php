@@ -2,7 +2,7 @@
 include "./guard.php";
 include "./database.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $name = $_POST['name'];
+  $name = htmlspecialchars($_POST['name']);
   $stmt = $mysqli->prepare("update users set username = ? where userId=?");
   $stmt->bind_param("sd", $name, $user);
   $stmt->execute();

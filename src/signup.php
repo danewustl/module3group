@@ -1,6 +1,6 @@
 <?php
 require "database.php";
-$user = $_POST['user'];
+$user = htmlspecialchars($_POST['user']);
 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
 

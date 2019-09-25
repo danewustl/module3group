@@ -2,7 +2,7 @@
 include "./guard.php";
 include "./database.php";
 
-$storyId=$_GET['sid'];
+$storyId=htmlspecialchars($_GET['sid']);
 
 $stmt = $mysqli->prepare("update stories set hits = hits + 1 where storyId = ?");
 $stmt->bind_param('d', $storyId);
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
     $stmt->close();
   } elseif ($action == 'delete_comment') {
-    $commentId = $_POST['comment_id'];
+    $commentId = htmlspecialchars($_POST['comment_id']);
     $stmt = $mysqli->prepare("delete from comments where commentId=? and commenter=?");
     $stmt->bind_param("ds", $commentId, $user);
     $stmt->execute();
